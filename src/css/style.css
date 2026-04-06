@@ -1,0 +1,117 @@
+/* Importamos la arquitectura CSS */
+@import './variables.css';
+@import './layout.css';
+
+/* Tipografía y Header */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-color);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover, .navbar a.active {
+    color: var(--primary-color);
+}
+
+/* Textos Generales */
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.page-content h1 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+/* Grid de Servicios */
+.servicios h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.grid-servicios {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.servicio-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 300px;
+    border: 1px solid #30363d;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.servicio-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.servicio-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Listas y Formulario de Contacto */
+.lista-valores {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.lista-valores li {
+    margin-bottom: 0.5rem;
+}
+
+.formulario-base {
+    max-width: 500px;
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid #30363d;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: #000;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+}
