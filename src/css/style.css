@@ -1,8 +1,6 @@
-/* Importamos la arquitectura CSS */
 @import './variables.css';
 @import './layout.css';
 
-/* Tipografía y Header */
 .logo {
     display: flex;
     align-items: center;
@@ -27,7 +25,6 @@
     color: var(--primary-color);
 }
 
-/* Textos Generales */
 .hero {
     text-align: center;
     padding: 4rem 0;
@@ -44,7 +41,6 @@
     margin-bottom: 1rem;
 }
 
-/* Grid de Servicios */
 .servicios h2 {
     text-align: center;
     margin-bottom: 2rem;
@@ -92,7 +88,6 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
 }
 
-/* Listas y Formulario de Contacto */
 .lista-valores {
     margin-top: 1rem;
     padding-left: 1.5rem;
@@ -129,4 +124,78 @@
     cursor: pointer;
     font-weight: bold;
     margin-top: 1rem;
+}
+
+.header {
+    position: relative;
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 100;
+}
+
+.hamburger, .hamburger::before, .hamburger::after {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+}
+.hamburger::before { transform: translateY(-8px); }
+.hamburger::after { transform: translateY(8px); }
+
+.menu-toggle.active .hamburger { background-color: transparent; }
+.menu-toggle.active .hamburger::before { transform: rotate(45deg) translateY(0); }
+.menu-toggle.active .hamburger::after { transform: rotate(-45deg) translateY(0); }
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #010409;
+        display: none;
+        padding: 2rem 0;
+        border-bottom: 1px solid #30363d;
+        z-index: 90;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+    }
+    
+    .navbar.active {
+        display: block;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .hero { padding: 2rem 0; }
+    .hero h1 { font-size: 2rem; }
+
+    .servicio-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar ul { gap: 1.5rem; }
+    .hero h1 { font-size: 1.8rem; }
 }

@@ -1,10 +1,20 @@
-// Importamos los estilos globales (Vite los inyecta automáticamente)
-import "./css/style.css";
+import { renderNavbar } from './components/navbar.js';
 
-// Importamos nuestros componentes ("bloques")
-import { renderNavbar } from "./components/navbar.js";
-import { renderFooter } from "./components/footer.js";
+document.addEventListener('DOMContentLoaded', () => {
+    // Inyectar el navbar
+    const navbarPlaceholder = document.getElementById('navbar-placeholder');
+    if (navbarPlaceholder) {
+        navbarPlaceholder.innerHTML = renderNavbar();
+    }
 
-// Ejecutamos la inyección en el DOM
-document.querySelector("#navbar-placeholder").innerHTML = renderNavbar();
-document.querySelector("#footer-placeholder").innerHTML = renderFooter();
+    // Lógica del botón hamburguesa
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+
+    if (menuToggle && navbar) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navbar.classList.toggle('active');
+        });
+    }
+});
