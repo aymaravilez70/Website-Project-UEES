@@ -3,6 +3,14 @@
 // Bloque Zero — UCOM351 Desarrollo de Aplicaciones Web (UEES)
 // ============================================================
 
+// === CONFIGURACIÓN DE EMAILJS ===
+
+const EMAILJS_SERVICE_ID = 'service_aun3ceo';
+const EMAILJS_TEMPLATE_ID = 'template_qno27lr';
+const EMAILJS_PUBLIC_KEY = 'w0Oz6i8ONcYhr8vpY';
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
 // === SELECCIÓN DE ELEMENTOS ===
 
 const formulario = document.querySelector('#contacto-form');
@@ -245,15 +253,30 @@ formulario.addEventListener('submit', (event) => {
     // Guardar el último término buscado en localStorage
     localStorage.setItem('ultimaBusqueda', nombre);
 
+    // Deshabilitar botón mientras se envía
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviando...';
+
     // Mostrar estado "buscando"
-    buscandoTexto.textContent = `Buscando información de ${nombre}...`;
+    buscandoTexto.textContent = `Enviando solicitud de ${nombre}...`;
     mostrarEstado('buscando');
 
-    // Simular una búsqueda con un retardo de 2 segundos
-    setTimeout(() => {
-        renderizarResultado(nombre, email, telefono, url);
-        mostrarEstado('resultado');
-    }, 2000);
+    // Enviar email con EmailJS
+    const templateParams = { nombre, email, telefono, url: url || 'No proporcionada' };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then(() => {
+            renderizarResultado(nombre, email, telefono, url);
+            mostrarEstado('resultado');
+            btnEnviar.textContent = 'Solicitar Consultoría';
+            actualizarBoton();
+        })
+        .catch((error) => {
+            console.error('Error al enviar email:', error);
+            buscandoTexto.textContent = 'Error al enviar. Intenta de nuevo.';
+            btnEnviar.textContent = 'Solicitar Consultoría';
+            actualizarBoton();
+        });
 });
 
 // Evento 'click' en el botón de limpiar
