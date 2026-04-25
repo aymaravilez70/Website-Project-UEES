@@ -31,7 +31,7 @@ const estadoValidacion = {
     nombre: false,
     email: false,
     telefono: false,
-    url: false
+    url: true
 };
 
 
@@ -89,7 +89,7 @@ const validarTelefono = (valor) => {
 const validarUrl = (valor) => {
     const regex = /^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
     if (valor.trim() === '') {
-        return { valido: false, mensaje: 'La URL del proyecto es obligatoria.' };
+        return { valido: true, mensaje: '' };
     }
     if (!regex.test(valor.trim())) {
         return { valido: false, mensaje: 'Ingresa una URL válida. Ej: https://mi-proyecto.com' };
@@ -108,7 +108,11 @@ const aplicarValidacion = (campo, elementoError, funcionValidar, clave) => {
     if (resultado.valido) {
         elementoError.textContent = '';
         campo.classList.remove('input-error');
-        campo.classList.add('input-valido');
+        if (campo.value.trim() !== '') {
+            campo.classList.add('input-valido');
+        } else {
+            campo.classList.remove('input-valido');
+        }
     } else {
         elementoError.textContent = resultado.mensaje;
         campo.classList.remove('input-valido');
@@ -153,12 +157,16 @@ const mostrarEstado = (estado) => {
  * Genera el contenido HTML de la tarjeta de resultado con datos simulados.
  */
 const renderizarResultado = (nombre, email, telefono, url) => {
+    const urlHtml = url
+        ? `<p><i class="fa-solid fa-link resultado-icono"></i> <strong>Proyecto:</strong> <a href="${url}" target="_blank">${url}</a></p>`
+        : '';
+
     resultadoContenido.innerHTML = `
         <div class="resultado-detalle">
-            <p><strong><i class="fa-solid fa-user"></i> Cliente:</strong> ${nombre}</p>
-            <p><strong><i class="fa-solid fa-envelope"></i> Email:</strong> ${email}</p>
-            <p><strong><i class="fa-solid fa-phone"></i> Teléfono:</strong> ${telefono}</p>
-            <p><strong><i class="fa-solid fa-link"></i> Proyecto:</strong> <a href="${url}" target="_blank">${url}</a></p>
+            <p><i class="fa-solid fa-user resultado-icono"></i> <strong>Cliente:</strong> ${nombre}</p>
+            <p><i class="fa-solid fa-envelope resultado-icono"></i> <strong>Email:</strong> ${email}</p>
+            <p><i class="fa-solid fa-phone resultado-icono"></i> <strong>Teléfono:</strong> ${telefono}</p>
+            ${urlHtml}
         </div>
         <p class="resultado-mensaje">Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas para evaluar los requerimientos de tu proyecto.</p>
     `;
@@ -174,7 +182,7 @@ const limpiarFormulario = () => {
     estadoValidacion.nombre = false;
     estadoValidacion.email = false;
     estadoValidacion.telefono = false;
-    estadoValidacion.url = false;
+    estadoValidacion.url = true;
 
     // Limpiar clases y mensajes de error
     const campos = [campoNombre, campoEmail, campoTelefono, campoUrl];

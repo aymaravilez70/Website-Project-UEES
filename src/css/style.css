@@ -356,6 +356,18 @@
 .resultado-detalle p {
     margin-bottom: 0.8rem;
     color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.resultado-icono {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    width: 1.3rem;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .resultado-detalle p:last-child {
