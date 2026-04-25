@@ -1,10 +1,17 @@
 import { renderNavbar } from './components/navbar.js';
+import { renderFooter } from './components/footer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Inyectar el navbar
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
     if (navbarPlaceholder) {
         navbarPlaceholder.innerHTML = renderNavbar();
+    }
+
+    // Inyectar el footer
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+    if (footerPlaceholder) {
+        footerPlaceholder.innerHTML = renderFooter();
     }
 
     // Lógica del botón hamburguesa
@@ -16,5 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.classList.toggle('active');
             navbar.classList.toggle('active');
         });
+    }
+
+    // Cargar script de validación solo en la página de contacto
+    const formulario = document.querySelector('#contacto-form');
+    if (formulario) {
+        import('./js/script.js');
     }
 });

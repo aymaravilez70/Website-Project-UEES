@@ -17,17 +17,59 @@
       <h1>Iniciemos un Proyecto</h1>
       <p>Déjanos tus datos y nos pondremos en contacto para evaluar los requerimientos tecnológicos de tu idea.</p>
 
-      <form class="formulario-base" action="#" method="POST">
+      <form class="formulario-base" id="contacto-form" novalidate>
+        <!-- Campo 1: Nombre -->
         <div class="form-group">
           <label for="nombre">Nombre o Empresa:</label>
           <input type="text" id="nombre" name="nombre" placeholder="Ej. OdontoMed">
+          <span class="error-message" id="nombre-error"></span>
         </div>
+
+        <!-- Campo 2: Email -->
         <div class="form-group">
           <label for="email">Correo Electrónico:</label>
           <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com">
+          <span class="error-message" id="email-error"></span>
         </div>
-        <button type="submit" class="btn">Solicitar Consultoría</button>
+
+        <!-- Campo 3: Teléfono -->
+        <div class="form-group">
+          <label for="telefono">Teléfono de Contacto:</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="Ej. 0990069857">
+          <span class="error-message" id="telefono-error"></span>
+        </div>
+
+        <!-- Campo 4: URL del Proyecto -->
+        <div class="form-group">
+          <label for="url-proyecto">URL del Proyecto (si existe):</label>
+          <input type="url" id="url-proyecto" name="url-proyecto" placeholder="https://mi-proyecto.com">
+          <span class="error-message" id="url-proyecto-error"></span>
+        </div>
+
+        <button type="submit" class="btn" id="btn-enviar" disabled>Solicitar Consultoría</button>
+        <button type="button" class="btn btn-limpiar" id="btn-limpiar">Limpiar Formulario</button>
       </form>
+
+      <!-- Zona de estados del DOM -->
+      <div id="resultado-zona" class="resultado-zona">
+        <div id="estado-inicial" class="estado estado-inicial activo">
+          <i class="fa-solid fa-paper-plane"></i>
+          <p>Completa el formulario y envíalo para solicitar tu consultoría personalizada.</p>
+        </div>
+
+        <div id="estado-buscando" class="estado estado-buscando">
+          <div class="spinner"></div>
+          <p id="buscando-texto">Procesando solicitud...</p>
+        </div>
+
+        <div id="estado-resultado" class="estado estado-resultado">
+          <div class="resultado-card">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>¡Solicitud Recibida!</h3>
+            <div id="resultado-contenido"></div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
