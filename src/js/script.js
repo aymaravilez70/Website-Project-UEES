@@ -7,6 +7,7 @@
 
 const EMAILJS_SERVICE_ID = 'service_aun3ceo';
 const EMAILJS_TEMPLATE_ID = 'template_qno27lr';
+const EMAILJS_AUTOREPLY_ID = 'template_nlo39xp';
 const EMAILJS_PUBLIC_KEY = 'w0Oz6i8ONcYhr8vpY';
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -264,7 +265,10 @@ formulario.addEventListener('submit', (event) => {
     // Enviar email con EmailJS
     const templateParams = { nombre, email, telefono, url: url || 'No proporcionada' };
 
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    Promise.all([
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams),
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_AUTOREPLY_ID, templateParams)
+    ])
         .then(() => {
             renderizarResultado(nombre, email, telefono, url);
             mostrarEstado('resultado');
