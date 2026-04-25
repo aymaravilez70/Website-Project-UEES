@@ -199,3 +199,181 @@
     .navbar ul { gap: 1.5rem; }
     .hero h1 { font-size: 1.8rem; }
 }
+
+
+/* ======================================
+   ESTILOS DE VALIDACIÓN DE FORMULARIOS
+   ====================================== */
+
+/* Mensajes de error */
+.error-message {
+    display: block;
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    min-height: 1.2rem;
+    transition: opacity 0.3s ease;
+}
+
+/* Input con error */
+.input-error {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.3);
+}
+
+/* Input válido */
+.input-valido {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+}
+
+/* Botón deshabilitado */
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: #555;
+    color: #999;
+}
+
+/* Botón de limpiar */
+.btn-limpiar {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid #30363d;
+}
+
+.btn-limpiar:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Form group labels */
+.form-group label {
+    color: var(--text-color);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid #30363d;
+    color: #fff;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/* ======================================
+   ZONA DE ESTADOS DEL DOM
+   ====================================== */
+
+.resultado-zona {
+    margin-top: 2.5rem;
+    min-height: 200px;
+}
+
+/* Todos los estados ocultos por defecto */
+.estado {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    border: 1px solid #30363d;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Estado visible */
+.estado.activo {
+    display: block;
+}
+
+/* Estado inicial */
+.estado-inicial i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.estado-inicial p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+/* Estado buscando */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #30363d;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.estado-buscando p {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Estado resultado */
+.resultado-card {
+    text-align: left;
+}
+
+.resultado-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.resultado-card h3 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.resultado-detalle {
+    background-color: var(--bg-color);
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.resultado-detalle p {
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.resultado-detalle p:last-child {
+    margin-bottom: 0;
+}
+
+.resultado-detalle a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.resultado-detalle a:hover {
+    text-decoration: underline;
+}
+
+.resultado-mensaje {
+    color: #8b949e;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1rem;
+}
