@@ -31,9 +31,13 @@ const errorUrl = document.querySelector('#url-proyecto-error');
 // Elementos de estados del DOM
 const estadoInicial = document.querySelector('#estado-inicial');
 const estadoBuscando = document.querySelector('#estado-buscando');
-const estadoResultado = document.querySelector('#estado-resultado');
 const buscandoTexto = document.querySelector('#buscando-texto');
 const resultadoContenido = document.querySelector('#resultado-contenido');
+
+// Elementos del modal
+const modalOverlay = document.querySelector('#modal-overlay');
+const modalCerrar = document.querySelector('#modal-cerrar');
+const modalBtnCerrar = document.querySelector('#modal-btn-cerrar');
 
 // Objeto para rastrear el estado de validación de cada campo
 const estadoValidacion = {
@@ -150,16 +154,28 @@ const mostrarEstado = (estado) => {
     // Remover la clase 'activo' de todos los estados
     estadoInicial.classList.remove('activo');
     estadoBuscando.classList.remove('activo');
-    estadoResultado.classList.remove('activo');
 
     // Agregar la clase 'activo' al estado solicitado
     if (estado === 'inicial') {
         estadoInicial.classList.add('activo');
     } else if (estado === 'buscando') {
         estadoBuscando.classList.add('activo');
-    } else if (estado === 'resultado') {
-        estadoResultado.classList.add('activo');
     }
+};
+
+/**
+ * Abre el modal de confirmación con los datos enviados.
+ */
+const abrirModal = () => {
+    modalOverlay.classList.add('activo');
+};
+
+/**
+ * Cierra el modal y resetea el formulario.
+ */
+const cerrarModal = () => {
+    modalOverlay.classList.remove('activo');
+    limpiarFormulario();
 };
 
 /**
@@ -271,9 +287,10 @@ formulario.addEventListener('submit', (event) => {
     ])
         .then(() => {
             renderizarResultado(nombre, email, telefono, url);
-            mostrarEstado('resultado');
+            mostrarEstado('inicial');
             btnEnviar.textContent = 'Solicitar Consultoría';
             actualizarBoton();
+            abrirModal();
         })
         .catch((error) => {
             console.error('Error al enviar email:', error);
@@ -286,6 +303,22 @@ formulario.addEventListener('submit', (event) => {
 // Evento 'click' en el botón de limpiar
 btnLimpiar.addEventListener('click', () => {
     limpiarFormulario();
+});
+
+// Eventos para cerrar el modal
+modalCerrar.addEventListener('click', () => {
+    cerrarModal();
+});
+
+modalBtnCerrar.addEventListener('click', () => {
+    cerrarModal();
+});
+
+// Cerrar modal al hacer clic fuera del contenido
+modalOverlay.addEventListener('click', (event) => {
+    if (event.target === modalOverlay) {
+        cerrarModal();
+    }
 });
 
 // Restaurar último término al cargar la página
