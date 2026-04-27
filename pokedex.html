@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bloque Zero | Pokédex</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script type="module" crossorigin src="/Website-Project-UEES/assets/pokedex-D1WY7qTQ.js"></script>
-  <link rel="modulepreload" crossorigin href="/Website-Project-UEES/assets/main-CsQvwPrl.js">
-  <link rel="stylesheet" crossorigin href="/Website-Project-UEES/assets/main-7dj2odiC.css">
+  <script type="module" crossorigin src="/Website-Project-UEES/assets/pokedex-DUTf-u7r.js"></script>
+  <link rel="modulepreload" crossorigin href="/Website-Project-UEES/assets/main-BEe4PHdC.js">
+  <link rel="stylesheet" crossorigin href="/Website-Project-UEES/assets/main-tf0fHG6F.css">
 </head>
 
 <body>
@@ -21,7 +21,10 @@
       <p>Busca un Pokémon por nombre o explora la lista completa.</p>
 
       <div class="pokedex-buscador">
-        <input type="text" id="pokemon-input" placeholder="Ej. pikachu, charizard, 25...">
+        <div class="buscador-input-wrap">
+          <input type="text" id="pokemon-input" placeholder="Ej. pikachu, charizard, 25..." autocomplete="off">
+          <ul id="sugerencias-lista" class="sugerencias-lista"></ul>
+        </div>
         <button type="button" class="btn" id="btn-buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
         <button type="button" class="btn btn-secundario" id="btn-listar"><i class="fa-solid fa-list"></i> Listar Todos</button>
       </div>
