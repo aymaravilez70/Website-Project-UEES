@@ -10,6 +10,7 @@ export default defineConfig({
         nosotros: resolve(__dirname, "nosotros.html"),
         contacto: resolve(__dirname, "contacto.html"),
         portafolio: resolve(__dirname, "portafolio.html"),
+        pokedex: resolve(__dirname, "pokedex.html"),
       },
     },
   },
