@@ -19,7 +19,10 @@
       <p>Busca un Pokémon por nombre o explora la lista completa.</p>
 
       <div class="pokedex-buscador">
-        <input type="text" id="pokemon-input" placeholder="Ej. pikachu, charizard, 25...">
+        <div class="buscador-input-wrap">
+          <input type="text" id="pokemon-input" placeholder="Ej. pikachu, charizard, 25..." autocomplete="off">
+          <ul id="sugerencias-lista" class="sugerencias-lista"></ul>
+        </div>
         <button type="button" class="btn" id="btn-buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
         <button type="button" class="btn btn-secundario" id="btn-listar"><i class="fa-solid fa-list"></i> Listar Todos</button>
       </div>
