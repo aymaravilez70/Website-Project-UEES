@@ -29,8 +29,7 @@ const errorTelefono = document.querySelector('#telefono-error');
 const errorUrl = document.querySelector('#url-proyecto-error');
 
 // Elementos de estados del DOM
-const estadoInicial = document.querySelector('#estado-inicial');
-const estadoBuscando = document.querySelector('#estado-buscando');
+const loadingOverlay = document.querySelector('#loading-overlay');
 const buscandoTexto = document.querySelector('#buscando-texto');
 const resultadoContenido = document.querySelector('#resultado-contenido');
 
@@ -151,15 +150,10 @@ const actualizarBoton = () => {
  * Usa classList.add() y classList.remove() según el requerimiento.
  */
 const mostrarEstado = (estado) => {
-    // Remover la clase 'activo' de todos los estados
-    estadoInicial.classList.remove('activo');
-    estadoBuscando.classList.remove('activo');
-
-    // Agregar la clase 'activo' al estado solicitado
-    if (estado === 'inicial') {
-        estadoInicial.classList.add('activo');
-    } else if (estado === 'buscando') {
-        estadoBuscando.classList.add('activo');
+    if (estado === 'buscando') {
+        loadingOverlay.classList.add('activo');
+    } else {
+        loadingOverlay.classList.remove('activo');
     }
 };
 
@@ -291,7 +285,7 @@ formulario.addEventListener('submit', (event) => {
         })
         .catch((error) => {
             console.error('Error al enviar email:', error);
-            buscandoTexto.textContent = 'Error al enviar. Intenta de nuevo.';
+            mostrarEstado('inicial');
             btnEnviar.textContent = 'Solicitar Consultoría';
             actualizarBoton();
         });
