@@ -333,9 +333,7 @@ btnListar.addEventListener('click', async () => {
     mostrarEstado('cargando');
 
     const lista = await listarPokemon();
-    if (lista.length > 0) {
-        renderizarTarjetas(lista);
-    }
+    renderizarTarjetas(lista);
 });
 
 // Reintentar última búsqueda
