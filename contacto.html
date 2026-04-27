@@ -7,8 +7,8 @@
   <title>Bloque Zero | Contacto</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" crossorigin src="/Website-Project-UEES/assets/main-BVxAGPts.js"></script>
-  <link rel="stylesheet" crossorigin href="/Website-Project-UEES/assets/main-CGGWkZ5D.css">
+  <script type="module" crossorigin src="/Website-Project-UEES/assets/main-MCpxD85g.js"></script>
+  <link rel="stylesheet" crossorigin href="/Website-Project-UEES/assets/main-SbupqqJh.css">
 </head>
 
 <body>
@@ -63,17 +63,21 @@
           <div class="spinner"></div>
           <p id="buscando-texto">Procesando solicitud...</p>
         </div>
-
-        <div id="estado-resultado" class="estado estado-resultado">
-          <div class="resultado-card">
-            <i class="fa-solid fa-circle-check"></i>
-            <h3>¡Solicitud Recibida!</h3>
-            <div id="resultado-contenido"></div>
-          </div>
-        </div>
       </div>
     </section>
   </main>
+
+  <!-- Modal de confirmación -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-contenido">
+      <button type="button" class="modal-cerrar" id="modal-cerrar">&times;</button>
+      <i class="fa-solid fa-circle-check modal-icono"></i>
+      <h3>¡Solicitud Recibida!</h3>
+      <div id="resultado-contenido" class="resultado-detalle"></div>
+      <p class="resultado-mensaje">Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas para evaluar los requerimientos de tu proyecto.</p>
+      <button type="button" class="btn" id="modal-btn-cerrar">Cerrar</button>
+    </div>
+  </div>
 
   <div id="footer-placeholder"></div>
 </body>
