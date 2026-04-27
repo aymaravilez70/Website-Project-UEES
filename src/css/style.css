@@ -709,7 +709,7 @@
 .modal-detalle {
     max-width: 600px;
     padding: 0;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .modal-detalle .modal-cerrar {
