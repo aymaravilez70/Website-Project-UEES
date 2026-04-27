@@ -213,6 +213,9 @@ const limpiarFormulario = () => {
         error.textContent = '';
     });
 
+    errorEnvio.textContent = '';
+    errorEnvio.classList.remove('activo');
+
     actualizarBoton();
     mostrarEstado('inicial');
 };
