@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/Website-Project-UEES/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloque Zero | Pokédex</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" crossorigin src="/Website-Project-UEES/assets/pokedex-ZuZQaN4t.js"></script>
+  <link rel="modulepreload" crossorigin href="/Website-Project-UEES/assets/main-CsQvwPrl.js">
+  <link rel="stylesheet" crossorigin href="/Website-Project-UEES/assets/main-7dj2odiC.css">
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content">
+    <section class="pokedex">
+      <h1><i class="fa-solid fa-dragon"></i> Pokédex</h1>
+      <p>Busca un Pokémon por nombre o explora la lista completa.</p>
+
+      <div class="pokedex-buscador">
+        <input type="text" id="pokemon-input" placeholder="Ej. pikachu, charizard, 25...">
+        <button type="button" class="btn" id="btn-buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+        <button type="button" class="btn btn-secundario" id="btn-listar"><i class="fa-solid fa-list"></i> Listar Todos</button>
+      </div>
+
+      <!-- Zona de estados -->
+      <div id="pokedex-estado" class="pokedex-estado">
+        <!-- Estado inicial -->
+        <div id="estado-inicial" class="poke-estado poke-estado-inicial activo">
+          <i class="fa-solid fa-gamepad"></i>
+          <p>Escribe el nombre de un Pokémon o haz clic en "Listar Todos" para explorar.</p>
+        </div>
+
+        <!-- Estado cargando -->
+        <div id="estado-cargando" class="poke-estado poke-estado-cargando">
+          <div class="spinner"></div>
+          <p>Buscando Pokémon...</p>
+        </div>
+
+        <!-- Estado resultados -->
+        <div id="estado-resultados" class="poke-estado poke-estado-resultados">
+          <div id="pokemon-grid" class="pokemon-grid"></div>
+        </div>
+
+        <!-- Estado sin resultados -->
+        <div id="estado-vacio" class="poke-estado poke-estado-vacio">
+          <i class="fa-solid fa-ghost"></i>
+          <p id="mensaje-vacio">No se encontró ningún Pokémon con ese nombre.</p>
+        </div>
+
+        <!-- Estado error -->
+        <div id="estado-error" class="poke-estado poke-estado-error">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p id="mensaje-error">Ocurrió un error al buscar.</p>
+          <button type="button" class="btn" id="btn-reintentar"><i class="fa-solid fa-rotate-right"></i> Reintentar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de detalle -->
+  <div id="detalle-overlay" class="modal-overlay">
+    <div class="modal-contenido modal-detalle">
+      <button type="button" class="modal-cerrar" id="detalle-cerrar">&times;</button>
+      <div id="detalle-contenido"></div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+</body>
+
+</html>
