@@ -15,6 +15,7 @@ export const renderNavbar = () => {
                 <li><a href="./index.html" class="${path.includes("index.html") || path === "/" || path.endsWith("/Website-Project-UEES/") ? "active" : ""}"><i class="fa-solid fa-house"></i> Inicio</a></li>
                 <li><a href="./nosotros.html" class="${path.includes("nosotros.html") ? "active" : ""}"><i class="fa-solid fa-users"></i> Nosotros</a></li>
                 <li><a href="./portafolio.html" class="${path.includes("portafolio.html") ? "active" : ""}"><i class="fa-solid fa-briefcase"></i> Portafolio</a></li>
+                <li><a href="./pokedex.html" class="${path.includes("pokedex.html") ? "active" : ""}"><i class="fa-solid fa-dragon"></i> Pokédex</a></li>
                 <li><a href="./contacto.html" class="${path.includes("contacto.html") ? "active" : ""}"><i class="fa-solid fa-envelope"></i> Contacto</a></li>
             </ul>
         </nav>
