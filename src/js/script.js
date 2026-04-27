@@ -3,6 +3,15 @@
 // Bloque Zero — UCOM351 Desarrollo de Aplicaciones Web (UEES)
 // ============================================================
 
+// === CONFIGURACIÓN DE EMAILJS ===
+
+const EMAILJS_SERVICE_ID = 'service_aun3ceo';
+const EMAILJS_TEMPLATE_ID = 'template_qno27lr';
+const EMAILJS_AUTOREPLY_ID = 'template_nlo39xp';
+const EMAILJS_PUBLIC_KEY = 'w0Oz6i8ONcYhr8vpY';
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
 // === SELECCIÓN DE ELEMENTOS ===
 
 const formulario = document.querySelector('#contacto-form');
@@ -22,16 +31,20 @@ const errorUrl = document.querySelector('#url-proyecto-error');
 // Elementos de estados del DOM
 const estadoInicial = document.querySelector('#estado-inicial');
 const estadoBuscando = document.querySelector('#estado-buscando');
-const estadoResultado = document.querySelector('#estado-resultado');
 const buscandoTexto = document.querySelector('#buscando-texto');
 const resultadoContenido = document.querySelector('#resultado-contenido');
+
+// Elementos del modal
+const modalOverlay = document.querySelector('#modal-overlay');
+const modalCerrar = document.querySelector('#modal-cerrar');
+const modalBtnCerrar = document.querySelector('#modal-btn-cerrar');
 
 // Objeto para rastrear el estado de validación de cada campo
 const estadoValidacion = {
     nombre: false,
     email: false,
     telefono: false,
-    url: false
+    url: true
 };
 
 
@@ -89,7 +102,7 @@ const validarTelefono = (valor) => {
 const validarUrl = (valor) => {
     const regex = /^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
     if (valor.trim() === '') {
-        return { valido: false, mensaje: 'La URL del proyecto es obligatoria.' };
+        return { valido: true, mensaje: '' };
     }
     if (!regex.test(valor.trim())) {
         return { valido: false, mensaje: 'Ingresa una URL válida. Ej: https://mi-proyecto.com' };
@@ -108,7 +121,11 @@ const aplicarValidacion = (campo, elementoError, funcionValidar, clave) => {
     if (resultado.valido) {
         elementoError.textContent = '';
         campo.classList.remove('input-error');
-        campo.classList.add('input-valido');
+        if (campo.value.trim() !== '') {
+            campo.classList.add('input-valido');
+        } else {
+            campo.classList.remove('input-valido');
+        }
     } else {
         elementoError.textContent = resultado.mensaje;
         campo.classList.remove('input-valido');
@@ -137,28 +154,44 @@ const mostrarEstado = (estado) => {
     // Remover la clase 'activo' de todos los estados
     estadoInicial.classList.remove('activo');
     estadoBuscando.classList.remove('activo');
-    estadoResultado.classList.remove('activo');
 
     // Agregar la clase 'activo' al estado solicitado
     if (estado === 'inicial') {
         estadoInicial.classList.add('activo');
     } else if (estado === 'buscando') {
         estadoBuscando.classList.add('activo');
-    } else if (estado === 'resultado') {
-        estadoResultado.classList.add('activo');
     }
+};
+
+/**
+ * Abre el modal de confirmación con los datos enviados.
+ */
+const abrirModal = () => {
+    modalOverlay.classList.add('activo');
+};
+
+/**
+ * Cierra el modal y resetea el formulario.
+ */
+const cerrarModal = () => {
+    modalOverlay.classList.remove('activo');
+    limpiarFormulario();
 };
 
 /**
  * Genera el contenido HTML de la tarjeta de resultado con datos simulados.
  */
 const renderizarResultado = (nombre, email, telefono, url) => {
+    const urlHtml = url
+        ? `<p><i class="fa-solid fa-link resultado-icono"></i> <strong>Proyecto:</strong> <a href="${url}" target="_blank">${url}</a></p>`
+        : '';
+
     resultadoContenido.innerHTML = `
         <div class="resultado-detalle">
-            <p><strong><i class="fa-solid fa-user"></i> Cliente:</strong> ${nombre}</p>
-            <p><strong><i class="fa-solid fa-envelope"></i> Email:</strong> ${email}</p>
-            <p><strong><i class="fa-solid fa-phone"></i> Teléfono:</strong> ${telefono}</p>
-            <p><strong><i class="fa-solid fa-link"></i> Proyecto:</strong> <a href="${url}" target="_blank">${url}</a></p>
+            <p><i class="fa-solid fa-user resultado-icono"></i> <strong>Cliente:</strong> ${nombre}</p>
+            <p><i class="fa-solid fa-envelope resultado-icono"></i> <strong>Email:</strong> ${email}</p>
+            <p><i class="fa-solid fa-phone resultado-icono"></i> <strong>Teléfono:</strong> ${telefono}</p>
+            ${urlHtml}
         </div>
         <p class="resultado-mensaje">Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas para evaluar los requerimientos de tu proyecto.</p>
     `;
@@ -174,7 +207,7 @@ const limpiarFormulario = () => {
     estadoValidacion.nombre = false;
     estadoValidacion.email = false;
     estadoValidacion.telefono = false;
-    estadoValidacion.url = false;
+    estadoValidacion.url = true;
 
     // Limpiar clases y mensajes de error
     const campos = [campoNombre, campoEmail, campoTelefono, campoUrl];
@@ -237,20 +270,55 @@ formulario.addEventListener('submit', (event) => {
     // Guardar el último término buscado en localStorage
     localStorage.setItem('ultimaBusqueda', nombre);
 
+    // Deshabilitar botón mientras se envía
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviando...';
+
     // Mostrar estado "buscando"
-    buscandoTexto.textContent = `Buscando información de ${nombre}...`;
+    buscandoTexto.textContent = `Enviando solicitud de ${nombre}...`;
     mostrarEstado('buscando');
 
-    // Simular una búsqueda con un retardo de 2 segundos
-    setTimeout(() => {
-        renderizarResultado(nombre, email, telefono, url);
-        mostrarEstado('resultado');
-    }, 2000);
+    // Enviar email con EmailJS
+    const templateParams = { nombre, email, telefono, url: url || 'No proporcionada' };
+
+    Promise.all([
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams),
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_AUTOREPLY_ID, templateParams)
+    ])
+        .then(() => {
+            renderizarResultado(nombre, email, telefono, url);
+            mostrarEstado('inicial');
+            btnEnviar.textContent = 'Solicitar Consultoría';
+            actualizarBoton();
+            abrirModal();
+        })
+        .catch((error) => {
+            console.error('Error al enviar email:', error);
+            buscandoTexto.textContent = 'Error al enviar. Intenta de nuevo.';
+            btnEnviar.textContent = 'Solicitar Consultoría';
+            actualizarBoton();
+        });
 });
 
 // Evento 'click' en el botón de limpiar
 btnLimpiar.addEventListener('click', () => {
     limpiarFormulario();
+});
+
+// Eventos para cerrar el modal
+modalCerrar.addEventListener('click', () => {
+    cerrarModal();
+});
+
+modalBtnCerrar.addEventListener('click', () => {
+    cerrarModal();
+});
+
+// Cerrar modal al hacer clic fuera del contenido
+modalOverlay.addEventListener('click', (event) => {
+    if (event.target === modalOverlay) {
+        cerrarModal();
+    }
 });
 
 // Restaurar último término al cargar la página
