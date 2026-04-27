@@ -285,7 +285,7 @@ formulario.addEventListener('submit', (event) => {
         })
         .catch((error) => {
             console.error('Error al enviar email:', error);
-            buscandoTexto.textContent = 'Error al enviar. Intenta de nuevo.';
+            mostrarEstado('inicial');
             btnEnviar.textContent = 'Solicitar Consultoría';
             actualizarBoton();
         });
