@@ -530,6 +530,10 @@
     align-items: center;
 }
 
+.pokedex-buscador .btn {
+    margin-top: 0;
+}
+
 .buscador-input-wrap {
     flex: 1;
     min-width: 200px;
