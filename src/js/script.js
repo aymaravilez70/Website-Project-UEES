@@ -187,13 +187,10 @@ const renderizarResultado = (nombre, email, telefono, url) => {
         : '';
 
     resultadoContenido.innerHTML = `
-        <div class="resultado-detalle">
-            <p><i class="fa-solid fa-user resultado-icono"></i> <strong>Cliente:</strong> ${nombre}</p>
-            <p><i class="fa-solid fa-envelope resultado-icono"></i> <strong>Email:</strong> ${email}</p>
-            <p><i class="fa-solid fa-phone resultado-icono"></i> <strong>Teléfono:</strong> ${telefono}</p>
-            ${urlHtml}
-        </div>
-        <p class="resultado-mensaje">Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas para evaluar los requerimientos de tu proyecto.</p>
+        <p><i class="fa-solid fa-user resultado-icono"></i> <strong>Cliente:</strong> ${nombre}</p>
+        <p><i class="fa-solid fa-envelope resultado-icono"></i> <strong>Email:</strong> ${email}</p>
+        <p><i class="fa-solid fa-phone resultado-icono"></i> <strong>Teléfono:</strong> ${telefono}</p>
+        ${urlHtml}
     `;
 };
 
