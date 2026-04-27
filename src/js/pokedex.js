@@ -3,7 +3,7 @@
 // === CONSTANTES ===
 
 const API_BASE = 'https://pokeapi.co/api/v2/pokemon';
-const POKEMON_LIMIT = 30;
+const POKEMON_LIMIT = 150;
 
 // === SELECCIÓN DE ELEMENTOS ===
 
@@ -26,6 +26,10 @@ const estadoError = document.querySelector('#estado-error');
 const detalleOverlay = document.querySelector('#detalle-overlay');
 const detalleCerrar = document.querySelector('#detalle-cerrar');
 const detalleContenido = document.querySelector('#detalle-contenido');
+
+// Autocompletado
+const sugerenciasLista = document.querySelector('#sugerencias-lista');
+let listaNombresPokemon = [];
 
 // Variable para guardar la última búsqueda (para Reintentar)
 let ultimaBusqueda = null;
@@ -323,9 +327,70 @@ btnBuscar.addEventListener('click', async () => {
 // Buscar al presionar Enter
 pokemonInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
+        sugerenciasLista.classList.remove('visible');
         btnBuscar.click();
     }
 });
+
+// === AUTOCOMPLETADO EN TIEMPO REAL ===
+
+const cargarNombresPokemon = async () => {
+    try {
+        const response = await fetch(`${API_BASE}?limit=1025&offset=0`);
+        if (!response.ok) return;
+        const data = await response.json();
+        listaNombresPokemon = data.results.map((p) => p.name);
+    } catch (error) {
+        console.error('Error al cargar nombres para autocompletado:', error);
+    }
+};
+
+const mostrarSugerencias = (texto) => {
+    sugerenciasLista.innerHTML = '';
+    if (texto.length < 2) {
+        sugerenciasLista.classList.remove('visible');
+        return;
+    }
+
+    const filtrados = listaNombresPokemon
+        .filter((nombre) => nombre.includes(texto.toLowerCase()))
+        .slice(0, 8);
+
+    if (filtrados.length === 0) {
+        sugerenciasLista.classList.remove('visible');
+        return;
+    }
+
+    filtrados.forEach((nombre) => {
+        const li = document.createElement('li');
+        li.classList.add('sugerencia-item');
+        const inicio = nombre.indexOf(texto.toLowerCase());
+        const antes = nombre.slice(0, inicio);
+        const coincidencia = nombre.slice(inicio, inicio + texto.length);
+        const despues = nombre.slice(inicio + texto.length);
+        li.innerHTML = `${antes}<strong>${coincidencia}</strong>${despues}`;
+        li.addEventListener('click', () => {
+            pokemonInput.value = nombre;
+            sugerenciasLista.classList.remove('visible');
+            btnBuscar.click();
+        });
+        sugerenciasLista.appendChild(li);
+    });
+
+    sugerenciasLista.classList.add('visible');
+};
+
+pokemonInput.addEventListener('input', () => {
+    mostrarSugerencias(pokemonInput.value.trim());
+});
+
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.buscador-input-wrap')) {
+        sugerenciasLista.classList.remove('visible');
+    }
+});
+
+cargarNombresPokemon();
 
 // Listar todos
 btnListar.addEventListener('click', async () => {
