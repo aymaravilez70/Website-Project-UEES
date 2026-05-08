@@ -867,3 +867,428 @@
         min-width: 80px;
     }
 }
+
+/* ======================================
+   XTREME WILD RIFT — GREMIO
+   ====================================== */
+
+.xtreme-hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.08) 0%, rgba(13, 17, 23, 0.4) 100%);
+    border: 1px solid #30363d;
+    position: relative;
+    overflow: hidden;
+}
+
+.xtreme-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.15), transparent 60%);
+    pointer-events: none;
+}
+
+.xtreme-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    background-color: rgba(0, 255, 136, 0.12);
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+.xtreme-hero h1 {
+    color: #ffffff;
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+}
+
+.xtreme-hero p {
+    color: var(--text-color);
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+.xtreme-section {
+    margin: 3rem 0;
+}
+
+.xtreme-section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.xtreme-section-header h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.xtreme-section-header h2 i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+.xtreme-section-header p {
+    color: #8b949e;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Salón de la Fama — grid de miembros */
+.miembros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.miembro-card {
+    background-color: var(--card-bg);
+    border: 1px solid #30363d;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.miembro-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary-color);
+    box-shadow: 0 14px 30px rgba(0, 255, 136, 0.18);
+}
+
+.miembro-card-img {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #010409;
+}
+
+.miembro-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    transition: transform 0.4s ease;
+}
+
+.miembro-card:hover .miembro-card-img img {
+    transform: scale(1.05);
+}
+
+.miembro-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(13, 17, 23, 0.85) 100%);
+    pointer-events: none;
+}
+
+.miembro-rol-badge {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    background-color: rgba(0, 0, 0, 0.65);
+    color: var(--primary-color);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    z-index: 2;
+    border: 1px solid rgba(0, 255, 136, 0.4);
+}
+
+.miembro-card-info {
+    padding: 1.2rem 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+}
+
+.miembro-card-info h3 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.miembro-champ {
+    color: var(--primary-color);
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.miembro-champ i {
+    margin-right: 0.3rem;
+}
+
+.miembro-descripcion {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.btn-ver-miembro {
+    margin-top: auto;
+    align-self: flex-start;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-ver-miembro:hover {
+    background-color: var(--primary-color);
+    color: #000;
+}
+
+/* Modal del miembro */
+.miembro-detalle-header {
+    align-items: flex-start;
+}
+
+.miembro-detalle-header img {
+    border-radius: 10px;
+    border: 1px solid #30363d;
+}
+
+.miembro-detalle-header .miembro-rol-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.miembro-frase {
+    color: var(--primary-color);
+    font-style: italic;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 1rem;
+    margin: 0 0 1.5rem;
+}
+
+.miembro-rasgos .detalle-info-item {
+    text-align: left;
+}
+
+/* Rankings */
+.rankings-zona {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.ranking-card {
+    background-color: var(--card-bg);
+    border: 1px solid #30363d;
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ranking-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.ranking-manco::before {
+    background: linear-gradient(90deg, #ff4d4d, #ffb84d);
+}
+
+.ranking-toxico::before {
+    background: linear-gradient(90deg, #ff4dff, #ff4d4d);
+}
+
+.ranking-afk::before {
+    background: linear-gradient(90deg, #4da6ff, #00ff88);
+}
+
+.ranking-header {
+    text-align: center;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 1rem;
+}
+
+.ranking-header i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.ranking-manco .ranking-header i {
+    color: #ff8a4d;
+}
+
+.ranking-toxico .ranking-header i {
+    color: #ff4d6e;
+}
+
+.ranking-afk .ranking-header i {
+    color: #4da6ff;
+}
+
+.ranking-header h3 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin: 0 0 0.4rem;
+}
+
+.ranking-header p {
+    color: #8b949e;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.ranking-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ranking-puesto {
+    display: grid;
+    grid-template-columns: auto auto 64px 1fr;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 0.8rem;
+    background-color: var(--bg-color);
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.ranking-puesto:hover {
+    transform: translateX(4px);
+    border-color: var(--primary-color);
+}
+
+.ranking-puesto.puesto-1 {
+    border-color: rgba(255, 196, 0, 0.45);
+    background: linear-gradient(135deg, rgba(255, 196, 0, 0.08), var(--bg-color) 60%);
+}
+
+.ranking-puesto.puesto-2 {
+    border-color: rgba(192, 192, 192, 0.35);
+}
+
+.ranking-puesto.puesto-3 {
+    border-color: rgba(205, 127, 50, 0.35);
+}
+
+.ranking-medalla {
+    font-size: 1.4rem;
+    width: 30px;
+    text-align: center;
+}
+
+.puesto-1 .ranking-medalla { color: #ffc400; }
+.puesto-2 .ranking-medalla { color: #c0c0c0; }
+.puesto-3 .ranking-medalla { color: #cd7f32; }
+
+.ranking-puesto-num {
+    color: #8b949e;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 30px;
+}
+
+.puesto-1 .ranking-puesto-num { color: #ffc400; }
+
+.ranking-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #30363d;
+    flex-shrink: 0;
+}
+
+.ranking-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+}
+
+.ranking-puesto-info {
+    min-width: 0;
+}
+
+.ranking-puesto-info h4 {
+    color: #ffffff;
+    margin: 0 0 0.2rem;
+    font-size: 1rem;
+}
+
+.ranking-razon {
+    color: var(--text-color);
+    font-size: 0.85rem;
+    margin: 0 0 0.4rem;
+    line-height: 1.4;
+}
+
+.ranking-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: rgba(0, 255, 136, 0.1);
+    color: var(--primary-color);
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .xtreme-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .miembros-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ranking-puesto {
+        grid-template-columns: auto auto 48px 1fr;
+        gap: 0.6rem;
+        padding: 0.7rem;
+    }
+
+    .ranking-avatar {
+        width: 48px;
+        height: 48px;
+    }
+}
