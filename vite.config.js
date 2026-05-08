@@ -11,6 +11,7 @@ export default defineConfig({
         contacto: resolve(__dirname, "contacto.html"),
         portafolio: resolve(__dirname, "portafolio.html"),
         pokedex: resolve(__dirname, "pokedex.html"),
+        xtreme: resolve(__dirname, "xtreme.html"),
       },
     },
   },
