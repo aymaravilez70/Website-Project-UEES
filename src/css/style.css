@@ -266,6 +266,19 @@
     resize: vertical;
 }
 
+/* Mensaje de error al enviar */
+.error-envio {
+    color: #f85149;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 1rem;
+    display: none;
+}
+
+.error-envio.activo {
+    display: block;
+}
+
 /* ======================================
    ZONA DE ESTADOS DEL DOM
    ====================================== */

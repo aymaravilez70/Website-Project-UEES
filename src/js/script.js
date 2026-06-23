@@ -32,6 +32,7 @@ const errorUrl = document.querySelector('#url-proyecto-error');
 const loadingOverlay = document.querySelector('#loading-overlay');
 const buscandoTexto = document.querySelector('#buscando-texto');
 const resultadoContenido = document.querySelector('#resultado-contenido');
+const errorEnvio = document.querySelector('#error-envio');
 
 // Elementos del modal
 const modalOverlay = document.querySelector('#modal-overlay');
@@ -212,6 +213,9 @@ const limpiarFormulario = () => {
         error.textContent = '';
     });
 
+    errorEnvio.textContent = '';
+    errorEnvio.classList.remove('activo');
+
     actualizarBoton();
     mostrarEstado('inicial');
 };
@@ -267,6 +271,8 @@ formulario.addEventListener('submit', (event) => {
 
     // Mostrar estado "buscando"
     buscandoTexto.textContent = `Enviando solicitud de ${nombre}...`;
+    errorEnvio.textContent = '';
+    errorEnvio.classList.remove('activo');
     mostrarEstado('buscando');
 
     // Enviar email con EmailJS
@@ -286,6 +292,8 @@ formulario.addEventListener('submit', (event) => {
         .catch((error) => {
             console.error('Error al enviar email:', error);
             mostrarEstado('inicial');
+            errorEnvio.textContent = 'Error al enviar la solicitud. Por favor, intenta de nuevo.';
+            errorEnvio.classList.add('activo');
             btnEnviar.textContent = 'Solicitar Consultoría';
             actualizarBoton();
         });
